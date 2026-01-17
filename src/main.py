@@ -76,9 +76,7 @@ def main():
 
     Implements a REPL (Read-Eval-Print Loop) for the CLI application.
     """
-
-    users = [{}]  # Placeholder for user data storage
-
+    
     print("Starting To-Do List Application...")
 
     while True:
