@@ -45,12 +45,15 @@ Stored in `todos.json`. Note that `id` must be unique (UUID).
 - [x] **4. Login and log the login details**
     - Implement a login function and store the login details in a JSON file.
 
-- [x] **4. Create to-do-list item**
+- [x] **5. Create to-do-list item**
     - Implement a function to create a to-do-list item.
 
-- [x] **5. View to-do-list item**
-    - Implement a function to view all to-do-list items.
-    - Implement a function to view the to-do-list item details (Title, Details, Priority (high, low, mid), Status (completed, pending), Owner, Updated date, Created date).
+- [x] **6. Edit to-do-list item**
+    - Implement a function to create a to-do-list item.
 
-- [x] **6. Mark to-do-list item as completed**
+- [x] **7. View to-do-list item**
+    - Implement a function to view all to-do-list items.
+    - Implement a function to view the to-do-list each item details (Title, Details, Priority (high, low, mid), Status (completed, pending), Owner, Updated date, Created date).
+
+- [x] **8. Mark to-do-list item as completed**
     - Create a function to enable marking to-do-list item as completed.
