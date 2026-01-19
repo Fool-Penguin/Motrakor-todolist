@@ -190,6 +190,34 @@ def handle_create_todo(username):
     print(f"  Priority: {priority.value}")
     print(f"  Status: {todo.status.value}")
 
+# =================== View All Todos here ===================
+def handle_view_all_todos(username):
+    """Handle viewing all to-do items for the current user.
+    
+    Args:
+        username: The username of the current user.
+    """
+    todos = load_todos()
+    user_todos = [todo for todo in todos if todo.owner == username]
+    
+    if not user_todos:
+        print("\n✗ You have no to-do items yet.")
+        return
+    
+    print("\n" + "=" * 80)
+    print(f"  Your To-Do Items ({len(user_todos)} total)")
+    print("=" * 80)
+    
+    for idx, todo in enumerate(user_todos, 1):
+        status_symbol = "✓" if todo.status.value == "COMPLETED" else "○"
+        print(f"\n[{idx}] {status_symbol} {todo.title}")
+        print(f"    Priority: {todo.priority.value}")
+        print(f"    Status: {todo.status.value}")
+        if todo.details:
+            print(f"    Details: {todo.details}")
+        print(f"    Created: {todo.created_at}")
+        print(f"    Updated: {todo.updated_at}")
+
 # =================== Edit Todo here ===================
 def handle_edit_todo(username):
     """Handle editing an existing todo item.
@@ -283,7 +311,7 @@ def handle_post_login_menu(username):
         if choice == "1":
             handle_create_todo(username)
         elif choice == "2":
-            print("\n[TODO] View all to-do items - coming soon!")
+            handle_view_all_todos(username)
         elif choice == "3":
             print("\n[TODO] View to-do item details - coming soon!")
         elif choice == "4":
