@@ -100,3 +100,68 @@ def calculate_velocity(distance: float, time: float) -> float:
     if time <= 0:
         raise ValueError("Time must be greater than zero")
     return distance / time
+
+
+def main() -> None:
+    """Run an interactive calculator in the terminal."""
+    calc = Calculator()
+    print("=" * 50)
+    print("Simple Calculator")
+    print("=" * 50)
+    print("Commands: add, subtract, multiply, divide, velocity, result, clear, exit")
+    print()
+
+    while True:
+        try:
+            command = input("Enter command: ").strip().lower()
+
+            if command == "exit":
+                print("Goodbye!")
+                break
+
+            elif command == "clear":
+                calc = Calculator()
+                print("Calculator cleared. Last result reset to 0.")
+
+            elif command == "result":
+                print(f"Last result: {calc.get_last_result()}")
+
+            elif command in ["add", "subtract", "multiply", "divide"]:
+                try:
+                    a = float(input("Enter first number: "))
+                    b = float(input("Enter second number: "))
+
+                    if command == "add":
+                        result = calc.add(a, b)
+                    elif command == "subtract":
+                        result = calc.subtract(a, b)
+                    elif command == "multiply":
+                        result = calc.multiply(a, b)
+                    elif command == "divide":
+                        result = calc.divide(a, b)
+
+                    print(f"Result: {result}")
+                except ValueError as e:
+                    print(f"Error: {e}")
+
+            elif command == "velocity":
+                try:
+                    distance = float(input("Enter distance: "))
+                    time = float(input("Enter time: "))
+                    result = calculate_velocity(distance, time)
+                    print(f"Velocity: {result}")
+                except ValueError as e:
+                    print(f"Error: {e}")
+
+            else:
+                print("Unknown command. Try: add, subtract, multiply, divide, velocity, result, clear, exit")
+
+        except KeyboardInterrupt:
+            print("\nGoodbye!")
+            break
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+
+if __name__ == "__main__":
+    main()
