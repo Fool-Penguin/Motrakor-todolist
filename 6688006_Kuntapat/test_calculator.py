@@ -3,7 +3,7 @@ Unit tests for the calculator module.
 """
 
 import pytest
-from calculator import add, subtract, multiply, divide
+from calculator import add, subtract, multiply, divide, velocity
 
 
 class TestAddition:
@@ -84,3 +84,23 @@ class TestDivision:
     
     def test_divide_zero_by_number(self):
         assert divide(0, 5) == 0.0
+
+
+class TestVelocity:
+    """Test cases for the velocity function."""
+    
+    def test_velocity_positive(self):
+        assert velocity(100, 10) == 10.0
+    
+    def test_velocity_negative_distance(self):
+        assert velocity(-100, 10) == -10.0
+    
+    def test_velocity_decimals(self):
+        assert velocity(50.5, 5.5) == 9.181818181818182
+    
+    def test_velocity_zero_distance(self):
+        assert velocity(0, 10) == 0.0
+    
+    def test_velocity_zero_time(self):
+        with pytest.raises(ValueError, match="Time cannot be zero"):
+            velocity(100, 0)

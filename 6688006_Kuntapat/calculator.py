@@ -60,3 +60,21 @@ def divide(a, b):
     if b == 0:
         raise ValueError("Cannot divide by zero")
     return a / b
+
+
+def velocity(distance, time):
+    """Calculate velocity given distance and time.
+    
+    Args:
+        distance: The distance traveled
+        time: The time taken
+    
+    Returns:
+        The velocity (distance / time)
+    
+    Raises:
+        ValueError: If time is zero (division by zero)
+    """
+    if time == 0:
+        raise ValueError("Time cannot be zero")
+    return distance / time

@@ -4,7 +4,7 @@ Simple Calculator Application
 This is the main entry point for the calculator. It provides an interactive command-line interface.
 """
 
-from calculator import add, subtract, multiply, divide
+from calculator import add, subtract, multiply, divide, velocity
 
 
 def display_menu():
@@ -16,7 +16,8 @@ def display_menu():
     print("2. Subtract")
     print("3. Multiply")
     print("4. Divide")
-    print("5. Exit")
+    print("5. Velocity")
+    print("6. Exit")
     print("="*40)
 
 
@@ -26,32 +27,38 @@ def main():
     
     while True:
         display_menu()
-        choice = input("Enter your choice (1-5): ").strip()
+        choice = input("Enter your choice (1-6): ").strip()
         
-        if choice == "5":
+        if choice == "6":
             print("Thank you for using the calculator. Goodbye!")
             break
         
-        if choice not in ["1", "2", "3", "4"]:
-            print("Invalid choice. Please select 1-5.")
+        if choice not in ["1", "2", "3", "4", "5"]:
+            print("Invalid choice. Please select 1-6.")
             continue
         
         try:
-            num1 = float(input("Enter first number: "))
-            num2 = float(input("Enter second number: "))
-            
-            if choice == "1":
-                result = add(num1, num2)
-                print(f"\n{num1} + {num2} = {result}")
-            elif choice == "2":
-                result = subtract(num1, num2)
-                print(f"\n{num1} - {num2} = {result}")
-            elif choice == "3":
-                result = multiply(num1, num2)
-                print(f"\n{num1} × {num2} = {result}")
-            elif choice == "4":
-                result = divide(num1, num2)
-                print(f"\n{num1} ÷ {num2} = {result}")
+            if choice == "5":
+                distance = float(input("Enter distance: "))
+                time = float(input("Enter time: "))
+                result = velocity(distance, time)
+                print(f"\nVelocity = {distance} / {time} = {result}")
+            else:
+                num1 = float(input("Enter first number: "))
+                num2 = float(input("Enter second number: "))
+                
+                if choice == "1":
+                    result = add(num1, num2)
+                    print(f"\n{num1} + {num2} = {result}")
+                elif choice == "2":
+                    result = subtract(num1, num2)
+                    print(f"\n{num1} - {num2} = {result}")
+                elif choice == "3":
+                    result = multiply(num1, num2)
+                    print(f"\n{num1} × {num2} = {result}")
+                elif choice == "4":
+                    result = divide(num1, num2)
+                    print(f"\n{num1} ÷ {num2} = {result}")
         
         except ValueError as e:
             print(f"Error: {e}")
