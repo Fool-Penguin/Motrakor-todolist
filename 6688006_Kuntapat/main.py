@@ -38,27 +38,31 @@ def main():
             continue
         
         try:
-            if choice == "5":
+            if choice == "1":
+                num1 = float(input("Enter first number: "))
+                num2 = float(input("Enter second number: "))
+                result = add(num1, num2)
+                print(f"\n{num1} + {num2} = {result}")
+            elif choice == "2":
+                num1 = float(input("Enter first number: "))
+                num2 = float(input("Enter second number: "))
+                result = subtract(num1, num2)
+                print(f"\n{num1} - {num2} = {result}")
+            elif choice == "3":
+                num1 = float(input("Enter first number: "))
+                num2 = float(input("Enter second number: "))
+                result = multiply(num1, num2)
+                print(f"\n{num1} × {num2} = {result}")
+            elif choice == "4":
+                num1 = float(input("Enter first number: "))
+                num2 = float(input("Enter second number: "))
+                result = divide(num1, num2)
+                print(f"\n{num1} ÷ {num2} = {result}")
+            elif choice == "5":
                 distance = float(input("Enter distance: "))
                 time = float(input("Enter time: "))
                 result = velocity(distance, time)
                 print(f"\nVelocity = {distance} / {time} = {result}")
-            else:
-                num1 = float(input("Enter first number: "))
-                num2 = float(input("Enter second number: "))
-                
-                if choice == "1":
-                    result = add(num1, num2)
-                    print(f"\n{num1} + {num2} = {result}")
-                elif choice == "2":
-                    result = subtract(num1, num2)
-                    print(f"\n{num1} - {num2} = {result}")
-                elif choice == "3":
-                    result = multiply(num1, num2)
-                    print(f"\n{num1} × {num2} = {result}")
-                elif choice == "4":
-                    result = divide(num1, num2)
-                    print(f"\n{num1} ÷ {num2} = {result}")
         
         except ValueError as e:
             print(f"Error: {e}")
