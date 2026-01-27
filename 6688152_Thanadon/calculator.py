@@ -29,7 +29,6 @@ def calculate_velocity(distance, time):
         raise ValueError("Time must be greater than zero")
     return distance / time
 
-
 def main():
     """Interactive calculator main function."""
     print("=" * 40)
