@@ -1,7 +1,7 @@
 """
 Simple Calculator Module
 
-This module provides basic arithmetic operations: add, subtract, multiply, divide, and velocity.
+This module provides basic arithmetic operations: add, subtract, multiply, and divide.
 """
 
 
@@ -60,21 +60,3 @@ def divide(a, b):
     if b == 0:
         raise ValueError("Cannot divide by zero")
     return a / b
-
-
-def calculate_velocity(distance: float, time: float) -> float:
-    """Calculate velocity given distance and time.
-    
-    Args:
-        distance: The distance traveled
-        time: The time taken
-    
-    Returns:
-        The velocity (distance / time)
-    
-    Raises:
-        ValueError: If time is less than or equal to zero
-    """
-    if time <= 0:
-        raise ValueError("Time must be greater than zero")
-    return distance / time
