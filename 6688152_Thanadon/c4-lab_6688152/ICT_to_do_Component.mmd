@@ -1,0 +1,45 @@
+C4Component
+  title Component diagram for ICT To Do List - Web API
+
+  Container(web, "Web App", "React", "Single page application for task management via web browsers.")
+  Container(mobile, "Mobile App", "Flutter", "Cross-platform mobile application for task management.")
+  ContainerDb(database, "Database", "PostgreSQL", "Stores user data, tasks, courses, assignments, and sync status.")
+  Container_Ext(connector, "MyCourses Connector", "Python", "Integration service that syncs data from MyCourses into the To Do List system.")
+  System_Ext(mycourses, "MyCourses", "External ICT e-learning system providing courses and assignments.")
+
+  Container_Boundary(api, "Web API") {
+    Component(auth, "Authentication & Authorization", "FastAPI Security", "Handles login, token validation, and access control checks.")
+    Component(taskMgmt, "Task Management", "FastAPI Routes", "CRUD operations for manual and imported tasks.")
+    Component(syncOrch, "MyCourses Sync Orchestrator", "Service", "Manages sync workflow and decides when to call external services.")
+    Component(myclient, "MyCourses Client", "HTTP Client", "Calls MyCourses web services and handles HTTPS requests and JSON parsing.")
+    Component(mapping, "Mapping Component", "Service", "Converts MyCourses assignment and submission data into task model.")
+    Component(syncHist, "Sync History", "Service", "Records sync outcomes and provides data for admin monitoring.")
+    Component(dataAccess, "Data Access", "SQLAlchemy ORM", "Provides repository functions for PostgreSQL access and transactions.")
+
+    Rel(auth, dataAccess, "Uses", "ORM")
+    Rel(taskMgmt, auth, "Uses")
+    Rel(taskMgmt, dataAccess, "Uses", "ORM")
+    Rel(syncOrch, myclient, "Calls")
+    Rel(syncOrch, mapping, "Uses")
+    Rel(syncOrch, taskMgmt, "Calls")
+    Rel(syncOrch, syncHist, "Uses")
+    Rel(mapping, dataAccess, "Uses", "ORM")
+    Rel(dataAccess, database, "Reads from and writes to", "SQL")
+  }
+
+  Rel(web, auth, "Authenticates via", "JSON/HTTPS")
+  Rel(web, taskMgmt, "Requests tasks via", "JSON/HTTPS")
+  Rel(mobile, auth, "Authenticates via", "JSON/HTTPS")
+  Rel(mobile, taskMgmt, "Requests tasks via", "JSON/HTTPS")
+  Rel(taskMgmt, syncOrch, "Invokes to trigger sync")
+  Rel(myclient, connector, "Calls to fetch data", "JSON/HTTPS")
+  Rel(connector, mycourses, "Fetches courses, assignments, and submission status from", "JSON/HTTPS")
+
+  UpdateRelStyle(web, auth, $offsetY="-40")
+  UpdateRelStyle(web, taskMgmt, $offsetX="40", $offsetY="40")
+  UpdateRelStyle(mobile, auth, $offsetX="-90", $offsetY="40")
+  UpdateRelStyle(mobile, taskMgmt, $offsetY="-40")
+  UpdateRelStyle(taskMgmt, syncOrch, $offsetX="120", $offsetY="10")
+  UpdateRelStyle(syncOrch, myclient, $offsetX="-160", $offsetY="10")
+  UpdateRelStyle(myclient, mycourses, $offsetY="-40")
+  UpdateRelStyle(dataAccess, database, $offsetY="40", $offsetX="50")
