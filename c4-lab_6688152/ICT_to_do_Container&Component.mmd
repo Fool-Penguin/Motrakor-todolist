@@ -1,0 +1,26 @@
+C4Context
+  title System Context diagram for ICT To Do List
+
+  Person(student, "Student", "Manages personal tasks and tracks course work.")
+  Person(instructor, "Instructor", "Views teaching-related tasks and assignment deadlines.")
+  Person(admin, "System Administrator", "Manages configuration, accounts, and monitors sync health.")
+
+  System_Ext(mycourses, "MyCourses", "External ICT e-learning system providing courses, assignments, and submissions. Source of truth for imported assignments.")
+
+  System_Boundary(todo, "ICT To Do List") {
+  Container(web, "Web App", "React", "Task management for student and instructor via web browsers.")
+  Container(mobile, "Mobile App", "Flutter", "Cross-platform mobile app for task management on iOS and Android.")
+  Container(backend, "Web API", "Python FastAPI", "Handles business logic, data processing, and communication with external systems.")
+  ContainerDb(database, "Database", "PostgreSQL", "Stores user data, tasks, courses, assignments, and sync status.")
+  Container(connector, "MyCourses Connector", "Python", "Service that syncs data from MyCourses into the To Do List system.")
+
+  Rel(student, web, "Uses", "HTTPS/JSON")
+  Rel(student, mobile, "Uses", "HTTPS/JSON")
+  Rel(admin, web, "Uses", "HTTPS/JSON")
+  Rel(instructor, web, "Uses", "HTTPS/JSON")
+  Rel(web, backend, "Calls", "HTTPS/JSON")
+  Rel(mobile, backend, "Calls", "HTTPS/JSON")
+  Rel(backend, database, "Reads from and writes to", "SQL")
+  Rel(backend, connector, "Sends sync requests to", "HTTPS/JSON")
+  Rel(connector, mycourses, "Fetches courses, assignments, and submission status from", "JSON/HTTPS")
+  }

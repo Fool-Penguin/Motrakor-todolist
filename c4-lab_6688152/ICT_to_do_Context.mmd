@@ -1,0 +1,18 @@
+C4Context
+  title System Context diagram for ICT To Do List
+
+  Person(student, "Student", "Manages personal tasks and tracks course work.")
+  Person(instructor, "Instructor", "Views teaching-related tasks and assignment deadlines. Cannot see student private tasks.")
+  Person(admin, "System Administrator", "Manages configuration, accounts, and monitors sync health.")
+
+  System(todo, "ICT To Do List", "Task management system for ICT e-learning. Supports manual tasks and automatic sync from MyCourses. Includes Web App, Mobile App, and Admin UI.")
+
+  System_Ext(mycourses, "MyCourses", "External ICT e-learning system providing courses, assignments, and submissions. Source of truth for imported assignments.")
+  System_Ext(sso, "University SSO", "Authentication provider using OAuth2/OIDC when available. Falls back to local account system if unavailable.")
+
+  Rel(student, todo, "Manages tasks, views assignments, triggers sync", "Web/Mobile App via HTTPS/JSON")
+  Rel(instructor, todo, "Views teaching tasks and course deadlines", "Web App via HTTPS/JSON")
+  Rel(admin, todo, "Configures system, monitors sync health", "Admin UI via HTTPS/JSON")
+
+  Rel(todo, mycourses, "Retrieves courses, assignments, and submission status", "JSON/HTTPS")
+  Rel(todo, sso, "Authenticates users (when available)", "OAuth2/OIDC or local auth")
